@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.BDDAssertions.then;
 
 public class NormalFrameTest {
@@ -22,6 +23,15 @@ public class NormalFrameTest {
         Frame firstThrown = new NormalFrame(0).throwBowl("1");
         Frame secondThrown = firstThrown.throwBowl("2");
         assertThat(secondThrown.pinCounts().pinCounts().size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("3구를 던지려 할 경우, 예외가 발생한다.")
+    public void throwBowl_exception() throws Exception {
+        Frame secondThrown = new NormalFrame(0).throwBowl("1").throwBowl("2");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> secondThrown.throwBowl("1"))
+                .withMessage("2번을 초과하여 던질 수 없습니다.");
     }
 
     @Test
