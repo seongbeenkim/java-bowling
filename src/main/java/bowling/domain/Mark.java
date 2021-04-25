@@ -31,7 +31,7 @@ public enum Mark {
             return STRIKE.mark;
         }
 
-        if (!firstPinCount.isStrike() && firstPinCount.plus(secondPinCount) == PIN_COUNT_MAX) {
+        if (!firstPinCount.isStrike() && secondPinCount.isSpare(firstPinCount)) {
             return SPARE.mark;
         }
 
@@ -60,6 +60,6 @@ public enum Mark {
     }
 
     private static boolean isThirdSpare(PinCount firstPinCount, PinCount secondPinCount, PinCount thirdPinCount) {
-        return firstPinCount.isStrike() && !secondPinCount.isStrike() && secondPinCount.plus(thirdPinCount) == PIN_COUNT_MAX;
+        return firstPinCount.isStrike() && !secondPinCount.isStrike() && thirdPinCount.isSpare(secondPinCount);
     }
 }
