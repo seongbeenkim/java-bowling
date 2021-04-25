@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class NormalFrame implements Frame{
     private static final int NORMAL_FRAME_INDEX_MAX = 8;
+    private static final int PIN_COUNT_SIZE_MAX = 2;
+    private static final String CANNOT_THROW_MORE_THAN_TWO = "2번을 초과하여 던질 수 없습니다.";
 
     private final int index;
     private final PinCounts pinCounts;
@@ -19,8 +21,8 @@ public class NormalFrame implements Frame{
 
     @Override
     public Frame throwBowl(String pinCount) {
-        if (pinCounts.pinCounts().isEmpty()) {
-            return addBowl(pinCount);
+        if (pinCounts.pinCounts().size() == PIN_COUNT_SIZE_MAX) {
+            throw new IllegalArgumentException(CANNOT_THROW_MORE_THAN_TWO);
         }
 
         return addBowl(pinCount);
