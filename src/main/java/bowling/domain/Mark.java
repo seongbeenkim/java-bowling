@@ -5,15 +5,13 @@ public enum Mark {
     SPARE("/"),
     GUTTER("-");
 
-    private static final int PIN_COUNT_MAX = 10;
-
     private final String mark;
 
     Mark(String mark) {
         this.mark = mark;
     }
 
-    protected static String firstMark(PinCount pinCount) {
+    public static String firstMark(PinCount pinCount) {
         if (pinCount.isStrike()) {
             return STRIKE.mark;
         }
@@ -25,7 +23,7 @@ public enum Mark {
         return String.valueOf(pinCount.value());
     }
 
-    protected static String secondMark(PinCount firstPinCount, PinCount secondPinCount) {
+    public static String secondMark(PinCount firstPinCount, PinCount secondPinCount) {
 
         if (firstPinCount.isStrike() && secondPinCount.isStrike()) {
             return STRIKE.mark;
@@ -42,7 +40,7 @@ public enum Mark {
         return String.valueOf(secondPinCount.value());
     }
 
-    protected static String thirdMark(PinCount firstPinCount, PinCount secondPinCount, PinCount thirdPinCount) {
+    public static String thirdMark(PinCount firstPinCount, PinCount secondPinCount, PinCount thirdPinCount) {
 
         if (thirdPinCount.isStrike()) {
             return STRIKE.mark;
