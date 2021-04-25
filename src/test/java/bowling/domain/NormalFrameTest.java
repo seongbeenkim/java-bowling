@@ -12,14 +12,14 @@ public class NormalFrameTest {
     @Test
     @DisplayName("초구를 던지지 않았을 경우, 초구를 던진다.")
     public void throwBowl_first() throws Exception {
-        Frame normalFrame = new NormalFrame(0).throwBowl(1);
+        Frame normalFrame = new NormalFrame(0).throwBowl("1");
         assertThat(normalFrame.pinCounts().pinCounts().size()).isEqualTo(1);
     }
 
     @Test
     @DisplayName("초구를 던졌을 경우, 2구를 던진다.")
     public void throwBowl_second() throws Exception {
-        Frame firstThrown = new NormalFrame(0).throwBowl(1);
+        Frame firstThrown = new NormalFrame(0).throwBowl("1");
         Frame secondThrown = firstThrown.throwBowl("2");
         assertThat(secondThrown.pinCounts().pinCounts().size()).isEqualTo(2);
     }
@@ -28,8 +28,8 @@ public class NormalFrameTest {
     @DisplayName("해당 프레임이 완료되었을 경우, 다음 프레임을 반환한다.")
     public void next() throws Exception {
         //given
-        Frame lastBeforeTheFinal = new NormalFrame(8).throwBowl(1);
-        Frame normal = new NormalFrame(7).throwBowl(1);
+        Frame lastBeforeTheFinal = new NormalFrame(8).throwBowl("1");
+        Frame normal = new NormalFrame(7).throwBowl("1");
 
         //when
         Frame finalFrame = lastBeforeTheFinal.throwBowl("2").next();
@@ -42,14 +42,14 @@ public class NormalFrameTest {
     @Test
     @DisplayName("해당 프레임이 완료되지 않았을 경우, 현재 프레임을 반환한다.")
     public void next_same_frame() throws Exception {
-        Frame frame = new NormalFrame(8).throwBowl(1).next();
+        Frame frame = new NormalFrame(8).throwBowl("1").next();
         assertThat(frame.index()).isEqualTo(8);
     }
 
     @Test
     @DisplayName("해당 프레임이 완료됐을 경우, 참을 반환한다.")
     public void isFinished() throws Exception {
-        Frame firstThrown = new NormalFrame(0).throwBowl(1);
+        Frame firstThrown = new NormalFrame(0).throwBowl("1");
         Frame secondThrown = firstThrown.throwBowl("2");
         assertThat(secondThrown.isFinished()).isTrue();
     }

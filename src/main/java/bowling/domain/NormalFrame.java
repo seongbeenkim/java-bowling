@@ -26,10 +26,6 @@ public class NormalFrame implements Frame{
         return addBowl(pinCount);
     }
 
-    public Frame throwBowl(int pinCount) {
-        return throwBowl(String.valueOf(pinCount));
-    }
-
     private Frame addBowl(int pinCount) {
         pinCounts.knockDown(pinCount);
         return new NormalFrame(index, pinCounts);
