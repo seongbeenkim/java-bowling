@@ -39,15 +39,15 @@ public class NormalFrame implements Frame{
 
     @Override
     public Frame next() {
-        if (isFinished() && index < NORMAL_FRAME_INDEX_MAX) {
+        if (!isFinished()) {
+            return this;
+        }
+
+        if (index < NORMAL_FRAME_INDEX_MAX) {
             return new NormalFrame(index + 1, new NormalPinCounts());
         }
 
-        if (isFinished() && index == NORMAL_FRAME_INDEX_MAX) {
-            return new FinalFrame();
-        }
-
-        return this;
+        return new FinalFrame();
     }
 
     @Override
